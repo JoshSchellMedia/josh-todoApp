@@ -76,14 +76,14 @@ methods: {
     // obviously we want to do something more robust
     // including notifying the user somehow.
   },
-  saveTaskList () {
-    localStorage.setItem('taskList', JSON.stringify(this.taskList))
-  },
   saveApiTokens (apiTokens) {
   this.api.accessToken = apiTokens.access_token
   this.api.expiresAt = apiTokens.expires_at
   localStorage.setItem('todoApiTokens', JSON.stringify(apiTokens))
   this.refreshTasks()
+},
+saveTaskList () {
+        localStorage.setItem('taskList', JSON.stringify(this.taskList))
 },
 loadInitialData () {
   const apiTokens = JSON.parse(localStorage.getItem('todoApiTokens'))
