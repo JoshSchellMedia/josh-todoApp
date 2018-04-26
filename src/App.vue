@@ -3,6 +3,7 @@
     <div v-if="isLoggedIn">
       <img src="./assets/logo.png" class="logo">
       <todo-list></todo-list>
+      <button @click="logout">LOGOUT</button>
     </div>
     <login-page v-else @saveApiTokens="saveApiTokens" />
   </div>
@@ -83,6 +84,22 @@ methods: {
   this.api.expiresAt = apiTokens.expires_at
   localStorage.setItem('todoApiTokens', JSON.stringify(apiTokens))
   this.refreshTasks()
+},
+loadInitialData () {
+  const apiTokens = JSON.parse(localStorage.getItem('todoApiTokens'))
+  if (apiTokens) {
+    this.api.accessToken = apiTokens.access_token
+    this.api.expiresAt = apiTokens.expires_at
+    if (this.isLoggedIn) this.refreshTasks()
+  }
+},
+created () {
+  this.loadInitialData()
+}, 
+logout () {
+  this.api.accessToken = null
+  this.api.expiresAt = null
+  localStorage.removeItem('todoApiTokens')
 }
 },
 
@@ -96,7 +113,7 @@ computed: {
     headers: { 'Authorization' : `Bearer ${this.api.accessToken}`}
   }
 }
-} 
+},
 }
 </script>
 

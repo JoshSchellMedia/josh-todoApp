@@ -132,7 +132,7 @@ export default {
       },
       clearCompleted() {
           this.todos = this.todos.filter(todo => !todo.completed)
-      }
+      },
   }
 }
 </script>
