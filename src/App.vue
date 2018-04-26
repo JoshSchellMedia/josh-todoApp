@@ -17,7 +17,7 @@ import TodoList from '@/components/TodoList.vue'
 
 export default {
   name: 'App',
-  components: { LoginPage, AddTaskForm },
+  components: { LoginPage, TodoList },
   data () {
     return {
       baseURL: 'https://vue-todos.robertmckenney.ca/api',
